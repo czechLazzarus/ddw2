@@ -53,7 +53,7 @@ def getAveragesByStatistic(inputArray):
     averageRecall = averageRecall / len(inputArray)
     average_measure = average_measure / len(inputArray)
 
-    return (averagePrecision, averageRecall, average_measure)
+    return ("Average Precision "+str(averagePrecision), "Average Recall "+ str(averageRecall), "Average measure "+str(average_measure))
 
 
 def countPositiveAndNegative(topRelevant, result):
@@ -75,7 +75,7 @@ resultEuclideanTfi = []
 for d in range(1400):
     f = open("./d/" + str(d + 1) + ".txt")
     corpus.append(f.read())
-for q in range(225):
+for q in range(5):
     if (q > 0):
         corpus.pop()
     f = open("./q/" + str(q + 1) + ".txt")
@@ -124,10 +124,10 @@ for q in range(225):
     calculateValues = countPositiveAndNegative(topRelevant, result)
     resultEuclideanBinary.append(calculateStatistics(calculateValues[0], calculateValues[1]))
 
-print(getAveragesByStatistic(resultCosineTfidf))
-print(getAveragesByStatistic(resultCosineBinary))
-print(getAveragesByStatistic(resultCosineTfi))
+print("TDIF statistics with Cosine "+ str(getAveragesByStatistic(resultCosineTfidf)))
+print("Binary statistics with Cosine "+ str(getAveragesByStatistic(resultCosineBinary)))
+print("TFI statistics with Cosine "+ str(getAveragesByStatistic(resultCosineTfi)))
 
-print(getAveragesByStatistic(resultEuclideanTfidf))
-print(getAveragesByStatistic(resultEuclideanBinary))
-print(getAveragesByStatistic(resultEuclideanTfi))
+print("TDIF statistics with Euclidean "+str(getAveragesByStatistic(resultEuclideanTfidf)))
+print("Binary statistics with Euclidean "+str(getAveragesByStatistic(resultEuclideanBinary)))
+print("TFI statistics with Euclidean "+str(getAveragesByStatistic(resultEuclideanTfi)))
