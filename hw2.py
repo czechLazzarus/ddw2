@@ -75,7 +75,7 @@ resultEuclideanTfi = []
 for d in range(1400):
     f = open("./d/" + str(d + 1) + ".txt")
     corpus.append(f.read())
-for q in range(5):
+for q in range(225):
     if (q > 0):
         corpus.pop()
     f = open("./q/" + str(q + 1) + ".txt")
@@ -88,6 +88,7 @@ for q in range(5):
 
     tfidf_vectorizer.use_idf = False
     tf_matrix = tfidf_vectorizer.fit_transform(corpus)
+
 
     tfidf_vectorizer.binary = True
     tfidf_vectorizer.use_idf = False
@@ -124,10 +125,18 @@ for q in range(5):
     calculateValues = countPositiveAndNegative(topRelevant, result)
     resultEuclideanBinary.append(calculateStatistics(calculateValues[0], calculateValues[1]))
 
-print("TDIF statistics with Cosine "+ str(getAveragesByStatistic(resultCosineTfidf)))
+print("TFIDF statistics with Cosine "+ str(getAveragesByStatistic(resultCosineTfidf)))
 print("Binary statistics with Cosine "+ str(getAveragesByStatistic(resultCosineBinary)))
 print("TFI statistics with Cosine "+ str(getAveragesByStatistic(resultCosineTfi)))
 
-print("TDIF statistics with Euclidean "+str(getAveragesByStatistic(resultEuclideanTfidf)))
+print("TFIDF statistics with Euclidean "+str(getAveragesByStatistic(resultEuclideanTfidf)))
 print("Binary statistics with Euclidean "+str(getAveragesByStatistic(resultEuclideanBinary)))
 print("TFI statistics with Euclidean "+str(getAveragesByStatistic(resultEuclideanTfi)))
+
+np.savetxt("costfidf.csv", resultCosineTfidf, delimiter=",")
+np.savetxt("cosbin.csv", resultCosineBinary, delimiter=",")
+np.savetxt("costf.csv", resultCosineTfi, delimiter=",")
+
+np.savetxt("euclideantfidf.csv", resultEuclideanTfidf, delimiter=",")
+np.savetxt("euclideanbin.csv", resultEuclideanBinary, delimiter=",")
+np.savetxt("euclideantf.csv", resultEuclideanTfi, delimiter=",")
